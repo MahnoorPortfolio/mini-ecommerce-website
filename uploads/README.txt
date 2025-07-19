@@ -1,0 +1,1 @@
+Images uploaded via admin panel will appear here. The initial SVG placeholders have been copied to /assets/images/*. Replace them with real product photos when ready. 
