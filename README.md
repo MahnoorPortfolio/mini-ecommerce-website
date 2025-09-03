@@ -51,9 +51,65 @@ A simple, full-stack e-commerce website built with HTML, CSS, JavaScript, and PH
     ```
 
 2.  **Database Setup:**
-    *   Create a new database in your MySQL/MariaDB server.
-    *   Import the `database.sql` file (if provided) to set up the necessary tables.
-    *   Update the database connection details in `config.php` (or your relevant configuration file).
+
+    *   **Step 1: Create the Database**
+        *   Open phpMyAdmin (or any other MySQL client).
+        *   Create a new database and name it `mini_ecommerce`.
+
+    *   **Step 2: Create Tables**
+        *   Select the `mini_ecommerce` database.
+        *   Go to the **SQL** tab and run the following script to create all the required tables:
+
+        ```sql
+        CREATE TABLE IF NOT EXISTS `users` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `username` varchar(50) DEFAULT NULL,
+          `email` varchar(100) DEFAULT NULL,
+          `password` varchar(255) NOT NULL,
+          `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+          PRIMARY KEY (`id`),
+          UNIQUE KEY `username` (`username`),
+          UNIQUE KEY `email` (`email`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+        CREATE TABLE IF NOT EXISTS `products` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `name` varchar(255) NOT NULL,
+          `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+          `image` varchar(255) NOT NULL,
+          `category` varchar(100) NOT NULL,
+          `description` text NOT NULL,
+          `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+          PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+        CREATE TABLE IF NOT EXISTS `wishlist` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `user_id` int(11) NOT NULL,
+          `product_id` int(11) NOT NULL,
+          `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+          PRIMARY KEY (`id`),
+          UNIQUE KEY `user_id` (`user_id`,`product_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+        CREATE TABLE IF NOT EXISTS `reviews` (
+          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `user_id` int(11) NOT NULL,
+          `product_id` int(11) NOT NULL,
+          `rating` int(11) NOT NULL,
+          `review` text DEFAULT NULL,
+          `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+          PRIMARY KEY (`id`),
+          UNIQUE KEY `user_id` (`user_id`,`product_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        ```
+
+    *   **Step 3: Import Products**
+        *   After setting up the tables, open your web browser and navigate to the following URL to automatically import the product data:
+        *   [http://localhost/mini-ecommerce/import_images.php](http://localhost/mini-ecommerce/import_images.php)
+
+    *   **Step 4: Configure Connection (if needed)**
+        *   The database connection settings are in `includes/db.php`. The default credentials are set for a standard MAMP installation (`root`/`root`). If your setup is different, update this file accordingly.
 
 3.  **Web Server:**
     *   Make sure you have a web server like Apache (MAMP, XAMPP, WAMP) running.

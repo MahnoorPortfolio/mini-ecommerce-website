@@ -41,7 +41,7 @@ if(isset($_GET['import']) && $_GET['import']==='1'){
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top-custom shadow-sm">
     <div class="container py-1">
-        <a class="navbar-brand fw-bold" href="/mini-ecommerce/index.php">MiniShop</a>
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="/mini-ecommerce/index.php"><i class="bi bi-bag-heart-fill text-primary me-2"></i><span>MiniShop</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -64,7 +64,7 @@ if(isset($_GET['import']) && $_GET['import']==='1'){
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/mini-ecommerce/logout.php">Logout</a></li>
-                            <?php if($_SESSION['user_id'] === 1): ?>
+                            <?php if($_SESSION['user_id'] === 1 && file_exists(__DIR__ . '/../admin/dashboard.php')): ?>
                                 <li><a class="dropdown-item" href="/mini-ecommerce/admin/dashboard.php">Admin Panel</a></li>
                             <?php endif; ?>
                         </ul>

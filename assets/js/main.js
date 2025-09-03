@@ -26,9 +26,9 @@ srElements.forEach(el => srObserver.observe(el));
 const nav = document.querySelector('.navbar');
 function handleScroll() {
   if (window.scrollY > 60) {
-    nav.classList.add('bg-dark', 'navbar-shadow');
+    nav.classList.add('nav-scrolled');
   } else {
-    nav.classList.remove('bg-dark', 'navbar-shadow');
+    nav.classList.remove('nav-scrolled');
   }
 }
 window.addEventListener('scroll', handleScroll);

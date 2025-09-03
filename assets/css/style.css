@@ -26,6 +26,70 @@ body {
 /* Navbar */
 .navbar {
     box-shadow: 0 2px 6px rgba(0,0,0,.05);
+    transition: background-color .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+}
+.navbar.nav-scrolled {
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+.navbar .nav-link {
+    position: relative;
+    color: #333;
+    font-weight: 500;
+    transition: color .2s;
+}
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--bs-primary);
+    transition: width .25s ease;
+}
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
+    width: 100%;
+}
+.navbar .nav-link.active,
+.navbar .nav-link:focus,
+.navbar .nav-link:hover {
+    color: var(--bs-primary) !important;
+}
+.navbar .badge {
+    font-size: 0.75em;
+    padding: 0.35em 0.55em;
+    top: -0.4em;
+    left: 1em;
+}
+.navbar .dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,.08);
+}
+.navbar-search input.form-control {
+    border-radius: 2em;
+    padding-left: 2.2rem;
+}
+.navbar-search .btn {
+    border-radius: 2em;
+}
+.navbar-search {
+    position: relative;
+}
+.navbar-search input.form-control::placeholder {font-size: .9rem;}
+.navbar-search::before {
+    content: '\F52A'; /* Bootstrap icon search */
+    font-family: 'bootstrap-icons';
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+}
+
+.navbar {
+    box-shadow: 0 2px 6px rgba(0,0,0,.05);
     transition: background-color .3s ease;
 }
 .navbar-brand {
@@ -157,8 +221,31 @@ footer {
     color: #aaa;
 }
 footer a {
-    color: #fff;
+    color: #cfe2ff;
     text-decoration: none;
+}
+footer a.footer-link {
+    color: #cfe2ff;
+    position: relative;
+    transition: color .25s;
+}
+footer a.footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width .3s ease;
+}
+footer a.footer-link:hover,
+footer a.footer-link:focus {
+    color: #fff;
+}
+footer a.footer-link:hover::after,
+footer a.footer-link:focus::after {
+    width: 100%;
 }
 
 /* -------------------------------------------------------------
@@ -195,6 +282,25 @@ footer a {
 .read-more { color: #0d6efd; text-decoration: underline; cursor: pointer; font-size: 0.98em; }
 
 /* --- UI/UX Enhancements --- */
+/* Smooth hover lifts */
+.btn, .card, .social-link {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn:hover, .btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.social-link:hover {
+  transform: translateY(-3px) scale(1.15);
+}
+/* Product image zoom */
+.product-card .card-img-top {
+  transition: transform .4s ease;
+}
+.product-card:hover .card-img-top {
+  transform: scale(1.08);
+}
+
 .product-card {
   transition: box-shadow 0.2s, transform 0.2s;
   border-radius: 1rem;
